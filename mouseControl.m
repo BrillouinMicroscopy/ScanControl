@@ -1,8 +1,7 @@
 %% Configure parameters
 % get the screen size
-scaling = 1.5;          % scaling factor for high resolution devices
 set(0,'units','pixels');
-screenSize = scaling*get(0, 'screensize');
+screenSize = getScreenSize();
 
 % parameters of the area to click in
 areaPosition = [990; 118];
