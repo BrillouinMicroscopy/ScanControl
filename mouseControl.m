@@ -21,9 +21,6 @@ pos.y = areaPosition(2) + width(2)/(nrPositions(2)-1)*((1:nrPositions(2))-1);
 pos.x = linspace(1280, 1315, 30);
 pos.y = linspace(780, 815, 30);
 
-mouseMove = moveAndClick();
-
-mouseMove.move(areaPosition(1), areaPosition(2));
 for ii = 1:length(pos.x)
     for jj = 1:length(pos.y)
         stage.position = [pos.x(ii), pos.y(jj), 0];
