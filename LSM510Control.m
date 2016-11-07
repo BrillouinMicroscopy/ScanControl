@@ -11,13 +11,13 @@ classdef LSM510Control < handle
     methods
         %% Constructor
         function obj = LSM510Control()
-            obj.can = CANControl('COM1',9600);
-            obj.zen = moveAndClick();
+%             obj.can = CANControl('COM1',9600);
+            obj.zen = Utils.ScanControl.moveAndClick();
         end
         
         %% Destructor
         function delete (obj)
-            obj.can.delete();
+%             obj.can.delete();
         end
         
         %% Initialize the stage
@@ -26,7 +26,7 @@ classdef LSM510Control < handle
         
         %% Set the position
         function set.position (obj, position)
-            obj.can.focus.z = position(3);
+%             obj.can.focus.z = position(3);
             obj.zen.move(position(1), position(2));
             obj.zen.click();
         end
