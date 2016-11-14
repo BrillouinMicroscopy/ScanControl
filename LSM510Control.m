@@ -3,6 +3,7 @@ classdef LSM510Control < handle
     properties (Access = private)
         can;
         zen;
+        scanner;
     end
     properties (Dependent)
         position;
@@ -10,14 +11,22 @@ classdef LSM510Control < handle
     
     methods
         %% Constructor
-        function obj = LSM510Control()
-%             obj.can = CANControl('COM1',9600);
-            obj.zen = Utils.ScanControl.moveAndClick();
+        function obj = LSM510Control(scanner)
+            obj.scanner = scanner;
+            switch scanner
+                case 'Scanning Mirrors'
+                    obj.zen = Utils.ScanControl.moveAndClick();
+                case 'Translation Stage'
+                    obj.can = CANControl('COM1',9600);
+            end
         end
         
         %% Destructor
         function delete (obj)
-%             obj.can.delete();
+            c = obj.can;
+            if isa(c,'CanControl')
+                c.delete();
+            end
         end
         
         %% Initialize the stage
@@ -26,16 +35,28 @@ classdef LSM510Control < handle
         
         %% Set the position
         function set.position (obj, position)
-%             obj.can.focus.z = position(3);
-            obj.zen.move(position(1), position(2));
-            obj.zen.click();
+            switch obj.scanner
+                case 'Scanning Mirrors'
+                    obj.zen.move(position(1), position(2));
+                    obj.zen.click();
+                case 'Translation Stage'
+                    obj.can.mcu.x = position(1);
+                    obj.can.mcu.y = position(2);
+                    obj.can.focus.z = position(3);
+            end
         end
         
         %% Get the position
         function position = get.position (obj)
-            x = NaN;
-            y = NaN;
-            position = [x y obj.can.focus.z];
+            switch obj.scanner
+                case 'Scanning Mirrors'
+                    position = [NaN NaN NaN];
+                case 'Translation Stage'
+                    x = obj.can.mcu.x;
+                    y = obj.can.mcu.y;
+                    z = obj.can.focus.z;
+                    position = [x y z];
+            end
         end
         
         %% Move relative

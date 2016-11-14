@@ -9,9 +9,9 @@ classdef ScanControl < handle
     
     methods
         %% Constructor
-        function obj = ScanControl(device)
+        function obj = ScanControl(device, scanner)
             if strcmp(device,'LSM510')
-                obj.device = Utils.ScanControl.LSM510Control();
+                obj.device = Utils.ScanControl.LSM510Control(scanner);
             elseif strcmp(device,'XPS')
                 connection.IP = '192.168.0.254';    % IP Adress of the Controller
                 connection.Port = 5001;             % Port number of the Controller
