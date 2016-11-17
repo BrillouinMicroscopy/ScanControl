@@ -1,7 +1,7 @@
 classdef ScanControl < handle
 %ScanControl Wrapper for the different scanning stages ('LSM510' and 'XPS')
-    properties (Access = private)
-        device;
+    properties (Transient)
+      device;
     end
     properties (Dependent)
         position;

@@ -1,9 +1,11 @@
 classdef LSM510Control < handle
 %LSM510Control Wrapper for controlling the LSM510 via CAN and Zen2009
     properties (Access = private)
-        can;
         zen;
         scanner;
+    end
+    properties (Transient)
+        can;
     end
     properties (Dependent)
         position;
