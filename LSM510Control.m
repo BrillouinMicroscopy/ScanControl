@@ -19,7 +19,7 @@ classdef LSM510Control < handle
                 case 'Scanning Mirrors'
                     obj.zen = BA_Utils.ScanControl.moveAndClick();
                 case 'Translation Stage'
-                    obj.can = CANControl('COM1',9600);
+                    obj.can = BA_Utils.ScanControl.Utils.CANControl.CANControl('COM1',9600);
             end
         end
         

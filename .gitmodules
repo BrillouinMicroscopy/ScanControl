@@ -1,6 +1,6 @@
-[submodule "submodules/CANControl"]
-	path = submodules/CANControl
+[submodule "+Utils/+CANControl"]
+	path = +Utils/+CANControl
 	url = https://gitlab.rschluessler.com/BrillouinMicroscopy/CANControl.git
-[submodule "submodules/NewportXPS"]
-	path = submodules/NewportXPS
+[submodule "+Utils/+NewportXPS"]
+	path = +Utils/+NewportXPS
 	url = https://gitlab.rschluessler.com/BrillouinMicroscopy/NewportXPS.git
